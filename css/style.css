@@ -3,9 +3,9 @@
 #header {width:900px; height: 100px; margin:0 auto; background-color:#C0C000;}
 #content {width:900px; margin:0 auto;}
 
-#left {width:200px; background-color:#00C0C0; float:left;}
-#right {width:200px; background-color:#FFFF00; float:right;}
-#center {margin-left:200px; margin-right:200px; background-color:#8080FF;}
+#left {width:50px; background-color:#00C0C0; float:left; opacity: 0.2;}
+#right {width:200px; background-color:#FFFF00; float:right; opacity: 0.8}
+#center {margin-left:50px; margin-right:200px; background-color:#8080FF;}
 
 #footer{
   background-color:#FFC0FF; clear:both; height: 50px;
