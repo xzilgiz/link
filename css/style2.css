@@ -1,20 +1,37 @@
 * {margin:0px; padding:0px;}
 
-#header {min-width: 900px; width:100%; height: 100px; margin:0 auto; background-color:#C0C000; opacity: 0.8}
+#background {z-index: -999; position: fixed; width:100%; height: 100%;  
+             background: -o-linear-gradient(top, #C0C000, #F1DA36);
+             background: -moz-linear-gradient(top, #C0C000, #F1DA36); /* Firefox 3.6+ */
 
-#login {height:100px; background-color:#8080FF;}
+
+
+             /*
+             background: -webkit-gradient(linear, left top, left bottom, 
+                color-stop(0%,#fefcea), color-stop(100%,#f1da36));             
+             background: -webkit-linear-gradient(top, #fefcea, #f1da36);
+             background: -ms-linear-gradient(top, #fefcea, #f1da36);
+             background: linear-gradient(top, #fefcea, #f1da36); 
+             */
+             }
+
+
+#header {min-width: 900px; width:100%; height: 100px; margin:0 auto;}
+  #login {height:100px;}
 
 #content {min-width: 900px; width:100%; margin:0 auto;}
+  #left {width:200px; float:left; margin-left: 5px}
+  #right {width:200px; float:right; margin-right: 5px}
+  #center {margin-left:210px; margin-right:210px;}
 
-#left {width:200px; background-color:#00C0C0; float:left; }
-#right {width:200px; background-color:#FFFF00; float:right;}
-#center {margin-left:210px; margin-right:210px; background-color:#8080FF; opacity: 0.8}
-
-#footer{min-width: 900px;
-  background-color:#FFC0FF; clear:both; height: 50px;
-  width:100%; margin-left: auto; margin-right: auto; opacity: 0.8}
+#footer{min-width: 900px; clear:both; height: 50px; width:100%; margin-left: auto; margin-right: auto}
   
+#header, #footer {background-color: rgba(255,255,255,0.5)}
+#content {background-color: rgba(255,255,255,0.0) }
+#left, #right, #center {background-color: rgba(255,255,255,0.5)}
 
 
-#left, #right, #center {padding-top: 20px; padding-bottom: 20px;}
-#left, #right, #center {border-radius: 30px;}
+#header {margin-bottom: 10px;}
+#footer {margin-top: 10px;}
+
+#left, #right, #center {border-radius: 5px;}

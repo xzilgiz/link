@@ -3,8 +3,8 @@
  */
 
 $(document).ready(function () {
-  
-  var h = Math.max($(window).height(), $(document).height()) - ($('#header').height() + $('#footer').height());
+  var bh = Math.max($(window).height(), $(document).height())
+  var h = bh - ($('#header').height() + $('#footer').height());
 
   $('#content').height(h);
   $('#left').height(h);
@@ -30,13 +30,13 @@ $(document).ready(function () {
   //  });
 
   $(window).resize(function() {
-    var h = Math.max($(window).height(), $(document).height()) - ($('#header').height() + $('#footer').height());
+    var bh = Math.max($(window).height(), $(document).height())
+    var h = bh - ($('#header').height() + $('#footer').height());
           
     $('#content').height(h);
     $('#left').height(h);
     $('#right').height(h);
     $('#center').height(h);
-       
   });
 
   //$("#left").hoverIntent(
