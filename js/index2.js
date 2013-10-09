@@ -10,8 +10,6 @@ $(document).ready(function () {
   $('#left').height(h);
   $('#right').height(h);
   $('#center').height(h);
-  
-  
       
       //$('#menu').height($('#left').height()).width($('#left').width()+20);
       //$('#menu').css("left",$('#content').css("left")); 
@@ -51,6 +49,13 @@ $(document).ready(function () {
       //$("#right").animate({width: "200px",opacity: 0.8}, 200 );
     //}
   //);
+
+   $.getScript("js/login.js");
+
+   $('#btentitytype').click(function(event) {
+     $.getScript("js/entitytype.js");
+   });
+
 
 });
 

@@ -1,8 +1,8 @@
 $(document).ready(function () {
   $('#loader').removeClass('visibleoff').addClass('visibleon');
-  $.ajax({url: "template/body.tmpl", cache: false}).done(
+  $.ajax({url: "html/login.html", cache: false}).done(
     function( html ) {
-      $('#body').append(html);
+      $('#login').html(html);
       $('#loader').removeClass('visibleon').addClass('visibleoff');
     });
 
