@@ -30,7 +30,7 @@ public class EntityTypeView extends HttpServlet {
     int cur_position = 0;
     int max_position = entityTypeList.size();
 
-    result = "{ \"aaData\": [";
+    result = "[";
     
     for(EntityType ml : entityTypeList) {
       cur_position++;
@@ -40,7 +40,7 @@ public class EntityTypeView extends HttpServlet {
         result = result + ml + ",";
     }
     
-    result += "] }";
+    result += "]";
 
     return result;
 

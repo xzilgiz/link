@@ -1,32 +1,29 @@
-			
-		<h2>Типы сущностей</h2>
-		<div id="dynamic">
-          <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-	        <thead>
-		      <tr>
-				<th width="20%">code</th>
-				<th width="60%">sense</th>
-				<th width="20%">required</th>
-		      </tr>
-	        </thead>
-	        <tbody>
-		
-	        </tbody>
-	        <tfoot>
-		      <tr>
-				<th><input type="text" id="code"/></th>
-				<th><input type="text" id="sense"/></th>
-				<th>
-				  <select id="required">
-                    <option value="Y">Обязательное</option>
-                    <option selected value="N">Необязательное</option>
-                  </select>
-				</th>
-		      </tr>
-	        </tfoot>
-          </table>
-          
-          <input type="button" id="ins" value="Insert"/>
-          <input type="button" id="upd" value="Update"/>
-          <input type="button" id="delete" value="Delete"/>
-		</div>
+<h2>Типы сущностей</h2>
+<div id="dynamic">
+  <table id='exampletable'>
+    <thead>
+      <tr>
+        <th width="10%">code</th>
+        <th width="85%">sense</th>
+        <th width="5%">required</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+	<tfoot>
+	  <tr>
+		<th><input type="text" id="code"/></th>
+		<th><input type="text" id="sense"/></th>
+		<th>
+		  <select id="required">
+            <option value="Y">Обязательное</option>
+            <option selected value="N">Необязательное</option>
+          </select>
+		</th>
+	  </tr>
+	</tfoot>
+  </table>
+  <input type="button" id="ins" value="Insert"/>
+  <input type="button" id="upd" value="Update"/>
+  <input type="button" id="delete" value="Delete"/>
+</div>
