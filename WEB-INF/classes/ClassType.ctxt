@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=
+comment0.target=ClassType()
+comment1.params=code
+comment1.target=ClassType(java.lang.Integer)
+comment10.params=listener
+comment10.target=void\ addPropertyChangeListener(java.beans.PropertyChangeListener)
+comment11.params=listener
+comment11.target=void\ removePropertyChangeListener(java.beans.PropertyChangeListener)
+comment2.params=code\ sense
+comment2.target=ClassType(java.lang.Integer,\ java.lang.String)
+comment3.params=
+comment3.target=java.lang.Integer\ getCode()
+comment4.params=code
+comment4.target=void\ setCode(java.lang.Integer)
+comment5.params=
+comment5.target=java.lang.String\ getSense()
+comment6.params=sense
+comment6.target=void\ setSense(java.lang.String)
+comment7.params=
+comment7.target=int\ hashCode()
+comment8.params=object
+comment8.target=boolean\ equals(java.lang.Object)
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=12

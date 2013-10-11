@@ -47,6 +47,14 @@
       <url-pattern>/EntityTypeView/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+      <servlet-name>ClassTypeView</servlet-name>
+      <servlet-class>ClassTypeView</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>ClassTypeView</servlet-name>
+      <url-pattern>/ClassTypeView/*</url-pattern>
+    </servlet-mapping>
 
 
     <!-- Security roles referenced by this web application -->

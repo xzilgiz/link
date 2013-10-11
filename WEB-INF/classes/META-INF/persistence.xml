@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Mesh</class>
     <class>EntityType</class>
+    <class>ClassType</class>
     
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>

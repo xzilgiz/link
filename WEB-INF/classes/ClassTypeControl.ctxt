@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=em
+comment0.target=ClassTypeControl(javax.persistence.EntityManager)
+comment1.params=code\ sense
+comment1.target=ClassType\ createClassType(int,\ java.lang.String)
+comment2.params=code
+comment2.target=void\ removeClassType(int)
+comment3.params=code\ sense
+comment3.target=ClassType\ changeClassType(int,\ java.lang.String)
+comment4.params=code
+comment4.target=ClassType\ findClassType(int)
+comment5.params=
+comment5.target=java.util.List\ findAllClassTypes()
+numComments=6
