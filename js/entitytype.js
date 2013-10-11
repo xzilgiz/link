@@ -28,6 +28,18 @@ $(document).ready(function() {
 
       drawtable();
 
+      $('#exampletable tbody').on('click','tr', function () {
+        var nTds = $('td', this);
+
+        $('#code').val($(nTds[0]).text());
+        $('#sense').val($(nTds[1]).text());
+        if ($.trim($(nTds[2]).text()) != 'Y') {
+          $("#required [value='N']").attr("selected", "selected");
+        } else {
+          $("#required [value='Y']").attr("selected", "selected");
+        }
+      });
+
 	  //////////////// Event Operation -->
       $('#ins').click(function(event) {
         var js_action='ins';
