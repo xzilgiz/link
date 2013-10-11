@@ -21,7 +21,7 @@
   /*#login {height:100px;}*/
 
 #content {min-width: 900px; width:100%; margin:0 auto;}
-  #left {width:200px; float:left; margin-left: 5px}
+  #left {width:200px; float:left; margin-left: 5px; text-align: center;}
   #right {width:200px; float:right; margin-right: 5px}
   #center {margin-left:210px; margin-right:210px;}
 
@@ -37,3 +37,8 @@
 
 #left, #center {border-radius: 5px;}
 #right div {border-radius: 5px; margin-bottom: 10px;}
+
+#left input[type="button"] {width:90%;}
+#center input[type="button"] {width:20%;}
+#center input[type="text"] {width:99%;}
+#center select {width:99%;}
