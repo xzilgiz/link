@@ -5,6 +5,7 @@
     <class>Mesh</class>
     <class>EntityType</class>
     <class>ClassType</class>
+    <class>EntityParam</class>
     
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=em
+comment0.target=EntityParamControl(javax.persistence.EntityManager)
+comment1.params=entityID\ code\ sense\ mark\ num\ mask\ required\ enabled\ visible\ defaultValue
+comment1.target=EntityParam\ createEntityParam(int,\ int,\ java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=code
+comment2.target=void\ removeEntityParam(int)
+comment3.params=entityID\ code\ sense\ mark\ num\ mask\ required\ enabled\ visible\ defaultValue
+comment3.target=EntityParam\ changeEntityParam(int,\ int,\ java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment4.params=code
+comment4.target=EntityParam\ findByCodeEntityParam(int)
+comment5.params=
+comment5.target=java.util.List\ findAllEntityParams()
+numComments=6

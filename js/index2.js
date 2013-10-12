@@ -59,6 +59,10 @@ $(document).ready(function () {
    $('#btclasstype').click(function(event) {
      $.getScript("js/classtype.js");
    });
+
+   $('#btentityparam').click(function(event) {
+     $.getScript("js/entityparam.js");
+   });
 });
 
 
