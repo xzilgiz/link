@@ -63,6 +63,10 @@ $(document).ready(function () {
    $('#btentityparam').click(function(event) {
      $.getScript("js/entityparam.js");
    });
+
+   $('#btclassparam').click(function(event) {
+     $.getScript("js/classparam.js");
+   });
 });
 
 

@@ -40,12 +40,21 @@ public class EntityTypeControl {
         return et;
     }
 
-    public EntityType findEntityType(int code) {
-        return em.find(EntityType.class, code);
-    }
+    //public EntityType findEntityType(int code) {
+    //    return em.find(EntityType.class, code);
+    //}
 
     public List<EntityType> findAllEntityTypes() {
-        TypedQuery<EntityType> query = em.createQuery("SELECT m FROM EntityType m ORDER BY m.code", EntityType.class);
+        TypedQuery<EntityType> query =
+          em.createNamedQuery("EntityType.findAll", EntityType.class);
         return query.getResultList();
     }
+    
+    public EntityType findByCodeEntityType(int code) {
+        TypedQuery<EntityType> query =
+          em.createNamedQuery("EntityType.findByCode", EntityType.class);
+          query.setParameter("code", code);
+        return query.getResultList().get(0);
+    }
+
 }

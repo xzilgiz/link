@@ -27,17 +27,6 @@
     </description>
     <display-name>Servlet and JSP Examples</display-name>
 
-
-
-    <servlet>
-      <servlet-name>MeshJpaServlet</servlet-name>
-      <servlet-class>MeshJpaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>MeshJpaServlet</servlet-name>
-      <url-pattern>/MeshJpaServlet/*</url-pattern>
-    </servlet-mapping>
-
     <servlet>
       <servlet-name>EntityTypeView</servlet-name>
       <servlet-class>EntityTypeView</servlet-class>
@@ -63,6 +52,15 @@
     <servlet-mapping>
       <servlet-name>EntityParamView</servlet-name>
       <url-pattern>/EntityParamView/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>ClassParamView</servlet-name>
+      <servlet-class>ClassParamView</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>ClassParamView</servlet-name>
+      <url-pattern>/ClassParamView/*</url-pattern>
     </servlet-mapping>
 
     <!-- Security roles referenced by this web application -->

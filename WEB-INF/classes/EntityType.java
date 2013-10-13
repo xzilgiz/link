@@ -25,9 +25,9 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "EntityTypes", catalog = "", schema = "")
-//@NamedQueries({
-//    @NamedQuery(name = "EntityType.findAll", query = "SELECT e FROM EntityType e"),
-//    @NamedQuery(name = "EntityType.findByCode", query = "SELECT e FROM EntityType e WHERE e.code = :code")})
+@NamedQueries({
+    @NamedQuery(name = "EntityType.findAll", query = "SELECT e FROM EntityType e"),
+    @NamedQuery(name = "EntityType.findByCode", query = "SELECT e FROM EntityType e WHERE e.code = :code")})
 public class EntityType implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);

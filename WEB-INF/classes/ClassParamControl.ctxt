@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=em
+comment0.target=ClassParamControl(javax.persistence.EntityManager)
+comment1.params=code\ num\ classID\ entityID
+comment1.target=ClassParam\ createClassParam(int,\ int,\ int,\ int)
+comment2.params=code
+comment2.target=void\ removeClassParam(int)
+comment3.params=code\ num\ classID\ entityID
+comment3.target=ClassParam\ changeClassParam(int,\ int,\ int,\ int)
+comment4.params=code
+comment4.target=ClassParam\ findByCodeClassParam(int)
+comment5.params=
+comment5.target=java.util.List\ findAllClassParams()
+numComments=6

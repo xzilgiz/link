@@ -9,30 +9,30 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MeshJpaServlet
  */
 
-public class MeshJpaServlet extends HttpServlet {
+public class ClassParamView extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static javax.persistence.EntityManager entityManager;
-  private static java.util.List<Mesh> meshList;
-  private static javax.persistence.Query meshQuery;
+  private static java.util.List<ClassParam> classParamList;
+  private static javax.persistence.Query classParamQuery;
 
   private static String action;
-  private static String id;
-  private static String tag;
-  private static String sense;
-
-    
-  public MeshJpaServlet() {
+  private static String code;
+  private static String num;
+  private static String classID;
+  private static String entityID;
+  
+  public ClassParamView() {
     // TODO Auto-generated constructor stub
   }
 
   private String Render() {
     String result = "";
     int cur_position = 0;
-    int max_position = meshList.size();
+    int max_position = classParamList.size();
 
-    result = "{ \"aaData\": [";
+    result = "[";
     
-    for(Mesh ml : meshList) {
+    for(ClassParam ml : classParamList) {
       cur_position++;
       if(cur_position == max_position)
         result = result + ml;
@@ -40,7 +40,7 @@ public class MeshJpaServlet extends HttpServlet {
         result = result + ml + ",";
     }
     
-    result += "] }";
+    result += "]";
 
     return result;
 
@@ -52,24 +52,24 @@ public class MeshJpaServlet extends HttpServlet {
     action = request.getParameter("action");
 
     entityManager = javax.persistence.Persistence.createEntityManagerFactory("jdbc:sqlite:newd.dbPU").createEntityManager();
-    MeshControl meshcontrol = new MeshControl(entityManager);
+    ClassParamControl classparamcontrol = new ClassParamControl(entityManager);
     
     if(action.toString().equals("view")) {
-      meshList = meshcontrol.findAllMeshs();
+      classParamList = classparamcontrol.findAllClassParams();
       response.setContentType("text/plain");  
       //response.setCharacterEncoding("UTF-8"); 
       response.getWriter().write(Render()); 
     } else {
-      id = request.getParameter("id");
-      tag = request.getParameter("tag");
-      sense = request.getParameter("sense");
-
+      code = request.getParameter("code");
+      num = request.getParameter("num");
+      classID = request.getParameter("classID");
+      entityID = request.getParameter("entityID");
     }
 
     if(action.toString().equals("ins")) {
       //INSERT
       entityManager.getTransaction().begin();
-      meshcontrol.createMesh(Integer.parseInt(id), tag, sense);
+      classparamcontrol.createClassParam(Integer.parseInt(code), Integer.parseInt(num), Integer.parseInt(classID), Integer.parseInt(entityID));
       entityManager.getTransaction().commit();
       ActionNote = "Добавление произведено успешно";
     }
@@ -77,14 +77,14 @@ public class MeshJpaServlet extends HttpServlet {
     if(action.toString().equals("upd")) {
       //UPDATE
       entityManager.getTransaction().begin();
-      meshcontrol.changeMesh(Integer.parseInt(id), tag, sense);
+      classparamcontrol.changeClassParam(Integer.parseInt(code), Integer.parseInt(num), Integer.parseInt(classID), Integer.parseInt(entityID));
       entityManager.getTransaction().commit();
       ActionNote = "Изменение произведено успешно";
     }
     
     if(action.toString().equals("del")) {
       entityManager.getTransaction().begin();
-      meshcontrol.removeMesh(Integer.parseInt(id));
+      classparamcontrol.removeClassParam(Integer.parseInt(code));
       entityManager.getTransaction().commit();
       ActionNote = "Удаление произведено успешно";
     }

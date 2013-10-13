@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=
-comment0.target=MeshJpaServlet()
+comment0.target=ClassParamView()
 comment1.params=
 comment1.target=java.lang.String\ Render()
 comment2.params=request\ response

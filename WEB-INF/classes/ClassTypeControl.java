@@ -39,12 +39,16 @@ public class ClassTypeControl {
         return et;
     }
 
-    public ClassType findClassType(int code) {
-        return em.find(ClassType.class, code);
-    }
-
     public List<ClassType> findAllClassTypes() {
-        TypedQuery<ClassType> query = em.createQuery("SELECT m FROM ClassType m ORDER BY m.code", ClassType.class);
+        TypedQuery<ClassType> query =
+          em.createNamedQuery("ClassType.findAll", ClassType.class);
         return query.getResultList();
+    }
+    
+    public ClassType findByCodeClassType(int code) {
+        TypedQuery<ClassType> query =
+          em.createNamedQuery("ClassType.findByCode", ClassType.class);
+          query.setParameter("code", code);
+        return query.getResultList().get(0);
     }
 }

@@ -24,9 +24,9 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "ClassTypes", catalog = "", schema = "")
-//@NamedQueries({
-//    @NamedQuery(name = "ClassType.findAll", query = "SELECT c FROM ClassType c"),
-//    @NamedQuery(name = "ClassType.findByCode", query = "SELECT c FROM ClassType c WHERE c.code = :code")})
+@NamedQueries({
+    @NamedQuery(name = "ClassType.findAll", query = "SELECT c FROM ClassType c"),
+    @NamedQuery(name = "ClassType.findByCode", query = "SELECT c FROM ClassType c WHERE c.code = :code")})
 public class ClassType implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
