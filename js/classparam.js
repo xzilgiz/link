@@ -5,6 +5,12 @@ $(document).ready(function() {
       $('#center').html(html);
       $('#loader').removeClass('visibleon').addClass('visibleoff');
 
+      //Draw select
+      ////#entityID
+      $.ajax({url: "EntityTypeView?action=select", cache: false}).done(function(html) {$("#entityID").html(html);});
+      ////#classID
+      $.ajax({url: "ClassTypeView?action=select", cache: false}).done(function(html) {$("#classID").html(html);});
+
       function drawtable() {
 	    $(function() {
         $.ajax({

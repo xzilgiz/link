@@ -192,15 +192,15 @@ public class EntityParam implements Serializable {
     @Override
     public String toString() {
         return "[\"" + entityID.getCode() + 
-          "\",\" " + code + 
-          "\",\" " + sense + 
-          "\",\" " + mark + 
-          "\",\" " + num + 
-          "\",\" " + mask + 
-          "\",\" " + required + 
-          "\",\" " + enabled + 
-          "\",\" " + visible + 
-          "\",\" " + defaultValue + "\"]";
+          "\",\"" + code + 
+          "\",\"" + sense + 
+          "\",\"" + mark + 
+          "\",\"" + num + 
+          "\",\"" + mask + 
+          "\",\"" + required + 
+          "\",\"" + enabled + 
+          "\",\"" + visible + 
+          "\",\"" + defaultValue + "\"]";
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {

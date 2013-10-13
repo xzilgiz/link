@@ -114,9 +114,9 @@ public class ClassParam implements Serializable {
    @Override
    public String toString() {
         return "[\"" + code + 
-          "\",\" " + num + 
-          "\",\" " + classID.getCode() + 
-          "\",\" " + entityID.getCode() + "\"]";
+          "\",\"" + num + 
+          "\",\"" + classID.getCode() + 
+          "\",\"" + entityID.getCode() + "\"]";
    }
     
    public void addPropertyChangeListener(PropertyChangeListener listener) {

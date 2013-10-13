@@ -25,12 +25,10 @@ public class ClassTypeView extends HttpServlet {
   }
 
   private String Render() {
-    String result = "";
+    String result = "[";
     int cur_position = 0;
     int max_position = classTypeList.size();
 
-    result = "[";
-    
     for(ClassType ml : classTypeList) {
       cur_position++;
       if(cur_position == max_position)
@@ -40,12 +38,17 @@ public class ClassTypeView extends HttpServlet {
     }
     
     result += "]";
-
     return result;
-
   }
 
-
+  private String RenderSelect() {
+    String result = "";
+    for(ClassType ml : classTypeList) {
+      result = result + "<option value=\""+ ml.getCode() +"\">" + ml.getCode() + " - " + ml.getSense() +"</option>";
+    }    
+    return result;
+  }
+  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String ActionNote = "";
     action = request.getParameter("action");
@@ -58,6 +61,11 @@ public class ClassTypeView extends HttpServlet {
       response.setContentType("text/plain");  
       //response.setCharacterEncoding("UTF-8"); 
       response.getWriter().write(Render()); 
+    } else if (action.toString().equals("select")){
+      classTypeList = classtypecontrol.findAllClassTypes();
+      response.setContentType("text/plain");  
+      //response.setCharacterEncoding("UTF-8"); 
+      response.getWriter().write(RenderSelect());
     } else {
       code = request.getParameter("code");
       sense = request.getParameter("sense");

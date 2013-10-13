@@ -26,11 +26,9 @@ public class EntityTypeView extends HttpServlet {
   }
 
   private String Render() {
-    String result = "";
+    String result = "[";
     int cur_position = 0;
     int max_position = entityTypeList.size();
-
-    result = "[";
     
     for(EntityType ml : entityTypeList) {
       cur_position++;
@@ -41,11 +39,16 @@ public class EntityTypeView extends HttpServlet {
     }
     
     result += "]";
-
     return result;
-
   }
-
+  
+  private String RenderSelect() {
+    String result = "";
+    for(EntityType ml : entityTypeList) {
+      result = result + "<option value=\""+ ml.getCode() +"\">" + ml.getCode() + " - " + ml.getSense() +"</option>";
+    }    
+    return result;
+  }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String ActionNote = "";
@@ -59,6 +62,11 @@ public class EntityTypeView extends HttpServlet {
       response.setContentType("text/plain");  
       //response.setCharacterEncoding("UTF-8"); 
       response.getWriter().write(Render()); 
+    } else if(action.toString().equals("select")) {
+      entityTypeList = entitytypecontrol.findAllEntityTypes();
+      response.setContentType("text/plain");  
+      //response.setCharacterEncoding("UTF-8"); 
+      response.getWriter().write(RenderSelect());
     } else {
       code = request.getParameter("code");
       required = request.getParameter("required");

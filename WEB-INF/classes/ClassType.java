@@ -100,7 +100,7 @@ public class ClassType implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + code + "\",\" " + sense + "\"]";
+        return "[\"" + code + "\",\"" + sense + "\"]";
     }
     
      public void addPropertyChangeListener(PropertyChangeListener listener) {

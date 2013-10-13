@@ -113,7 +113,7 @@ public class EntityType implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + code + "\",\" " + sense + "\",\" " + required + "\"]";
+        return "[\"" + code + "\",\"" + sense + "\",\"" + required + "\"]";
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {
