@@ -63,6 +63,24 @@
       <url-pattern>/ClassParamView/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+      <servlet-name>MainObjectView</servlet-name>
+      <servlet-class>MainObjectView</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>MainObjectView</servlet-name>
+      <url-pattern>/MainObjectView/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>MainObjectParamView</servlet-name>
+      <servlet-class>MainObjectParamView</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>MainObjectParamView</servlet-name>
+      <url-pattern>/MainObjectParamView/*</url-pattern>
+    </servlet-mapping>
+
     <!-- Security roles referenced by this web application -->
     <security-role>
       <role-name>role1</role-name>

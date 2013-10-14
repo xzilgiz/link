@@ -6,6 +6,8 @@
     <class>ClassType</class>
     <class>EntityParam</class>
     <class>ClassParam</class>
+    <class>MainObject</class>
+    <class>MainObjectParam</class>
 
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
