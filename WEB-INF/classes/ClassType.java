@@ -6,7 +6,7 @@
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-//import java.util.List;
+import java.util.List;
 import javax.persistence.Basic;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,9 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-//import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.FetchType;
 
 /**
  *
@@ -40,12 +41,12 @@ public class ClassType implements Serializable {
     @Column(name = "Sense")
     private String sense;
     
+    @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)
+    private List<ClassParam> classParamList;
+    
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "classID")
     //private List<MainObject> mainObjectList;
     
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "classID")
-    //private List<ClassParam> classParamList;
-
     public ClassType() {
     }
 
@@ -72,11 +73,11 @@ public class ClassType implements Serializable {
         changeSupport.firePropertyChange("sense", oldSense, sense);
     }
 
+    public List<ClassParam> getClassParamList() {return classParamList;}
+    public void setClassParamList(List<ClassParam> classParamList) {this.classParamList = classParamList;}
+    
     //public List<MainObject> getMainObjectList() {return mainObjectList;}
     //public void setMainObjectList(List<MainObject> mainObjectList) {this.mainObjectList = mainObjectList;}
-
-    //public List<ClassParam> getClassParamList() {return classParamList;}
-    //public void setClassParamList(List<ClassParam> classParamList) {this.classParamList = classParamList;}
 
     @Override
     public int hashCode() {

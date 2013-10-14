@@ -25,9 +25,12 @@ public class ClassTypeControl {
     }
 
     public void removeClassType(int code) {
+        ClassParamControl classparamcontrol = new ClassParamControl(em);
         ClassType et = em.find(ClassType.class, code);
         if (et != null) {
-            em.remove(et);
+            if (et.getClassParamList().isEmpty()) {
+                em.remove(et);
+            }
         }
     }
 
