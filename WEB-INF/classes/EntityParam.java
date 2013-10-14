@@ -16,9 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-//import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -36,11 +38,6 @@ public class EntityParam implements Serializable {
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     
-    @Id
-    @JoinColumn(name = "EntityID", referencedColumnName = "Code")
-    @ManyToOne(optional = false)    
-    private EntityType entityID;
-
     @Id
     @Basic(optional = false)
     @Column(name = "Code")
@@ -76,7 +73,11 @@ public class EntityParam implements Serializable {
     @Basic(optional = false)
     @Column(name = "DefaultValue")    
     private String defaultValue;
-        
+
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name = "entityID")
+    private EntityType entityID;
+    
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "entityParam")
     //private List<MainObjectParam> mainObjectParamList;
 

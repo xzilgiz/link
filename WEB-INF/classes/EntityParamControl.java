@@ -57,13 +57,6 @@ public class EntityParamControl {
         return query.getResultList().get(0);
     }
 
-   // public List<EntityParam> findByEntityIDEntityParam(int entityID) {
-   //     TypedQuery<EntityParam> query =
-   //       em.createNamedQuery("EntityParam.findByKey", EntityParam.class);
-   //       query.setParameter("EntityID", entityID);
-   //     return query.getResultList();
-   // }
-
     public List<EntityParam> findAllEntityParams() {
         TypedQuery<EntityParam> query =
           em.createNamedQuery("EntityParam.findAll", EntityParam.class);

@@ -25,9 +25,13 @@ public class EntityTypeControl {
     }
 
     public void removeEntityType(int code) {
+        EntityParamControl entityparamcontrol = new EntityParamControl(em);
         EntityType et = em.find(EntityType.class, code);
+
         if (et != null) {
-            em.remove(et);
+            if (et.getEntityParamList().isEmpty()) {
+                em.remove(et);
+            }
         }
     }
 
@@ -39,10 +43,6 @@ public class EntityTypeControl {
         }
         return et;
     }
-
-    //public EntityType findEntityType(int code) {
-    //    return em.find(EntityType.class, code);
-    //}
 
     public List<EntityType> findAllEntityTypes() {
         TypedQuery<EntityType> query =

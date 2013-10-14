@@ -44,11 +44,11 @@ public class ClassParam implements Serializable {
     private int num;
     
     @JoinColumn(name = "ClassID", referencedColumnName = "Code")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private ClassType classID;
     
     @JoinColumn(name = "EntityID", referencedColumnName = "Code")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private EntityType entityID;
     
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "classParam")

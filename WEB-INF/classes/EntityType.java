@@ -6,18 +6,20 @@
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-//import java.util.List;
+import java.util.List;
 import javax.persistence.Basic;
-//import javax.persistence.CascadeType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-//import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 //import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -44,13 +46,10 @@ public class EntityType implements Serializable {
     @Basic(optional = false)
     @Column(name = "Required")
     private String required;
+        
+    @OneToMany(mappedBy = "entityID", fetch = FetchType.LAZY)
+    private List<EntityParam> entityParamList;
     
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "entityType")
-    //private ClassParam classParam;
-    
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "entityID")
-    //private List<EntityParam> entityParamList;
-
     public EntityType() {
     }
 
@@ -88,8 +87,8 @@ public class EntityType implements Serializable {
     //public ClassParam getClassParam() {return classParam;}
     //public void setClassParam(ClassParam classParam) {this.classParam = classParam;}
 
-    //public List<EntityParam> getEntityParamList() {return entityParamList;}
-    //public void setEntityParamList(List<EntityParam> entityParamList) {this.entityParamList = entityParamList;}
+    public List<EntityParam> getEntityParamList() {return entityParamList;}
+    public void setEntityParamList(List<EntityParam> entityParamList) {this.entityParamList = entityParamList;}
 
     @Override
     public int hashCode() {

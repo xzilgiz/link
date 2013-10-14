@@ -79,6 +79,7 @@ public class EntityTypeView extends HttpServlet {
       entityManager.getTransaction().begin();
       entitytypecontrol.createEntityType(Integer.parseInt(code), sense, required);
       entityManager.getTransaction().commit();
+      
       ActionNote = "Добавление произведено успешно";
     }
    
@@ -87,13 +88,16 @@ public class EntityTypeView extends HttpServlet {
       entityManager.getTransaction().begin();
       entitytypecontrol.changeEntityType(Integer.parseInt(code), sense, required);
       entityManager.getTransaction().commit();
+
       ActionNote = "Изменение произведено успешно";
     }
     
     if(action.toString().equals("del")) {
+      //DELETE
       entityManager.getTransaction().begin();
       entitytypecontrol.removeEntityType(Integer.parseInt(code));
       entityManager.getTransaction().commit();
+
       ActionNote = "Удаление произведено успешно";
     }
     
