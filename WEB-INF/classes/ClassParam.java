@@ -29,7 +29,7 @@ import javax.persistence.FetchType;
 @Table(name = "ClassParams", catalog = "", schema = "")
 @NamedQueries({
     @NamedQuery(name = "ClassParam.findAll", query = "SELECT c FROM ClassParam c"),
-    @NamedQuery(name = "ClassParam.findByCode", query = "SELECT c FROM ClassParam c WHERE c.code = :code")})
+    @NamedQuery(name = "ClassParam.findByID", query = "SELECT c FROM ClassParam c WHERE c.id = :id")})
 public class ClassParam implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -37,18 +37,18 @@ public class ClassParam implements Serializable {
     
     @Id
     @Basic(optional = false)
-    @Column(name = "Code")
-    private Integer code;
+    @Column(name = "ID")
+    private Integer id;
 
     @Basic(optional = false)
     @Column(name = "Num")
     private int num;
     
-    @JoinColumn(name = "ClassID", referencedColumnName = "Code")
+    @JoinColumn(name = "ClassID", referencedColumnName = "ID")
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private ClassType classID;
     
-    @JoinColumn(name = "EntityID", referencedColumnName = "Code")
+    @JoinColumn(name = "EntityID", referencedColumnName = "ID")
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private EntityType entityID;
     
@@ -58,22 +58,22 @@ public class ClassParam implements Serializable {
    public ClassParam() {
    }
 
-   public ClassParam(Integer code) {
-       this.code = code;
+   public ClassParam(Integer id) {
+       this.id = id;
    }
 
-   public ClassParam(Integer code, Integer num, ClassType classID, EntityType entityID) {
-       this.code = code;
+   public ClassParam(Integer id, Integer num, ClassType classID, EntityType entityID) {
+       this.id = id;
        this.num = num;
        this.classID = classID;
        this.entityID = entityID;
    }
 
-   public Integer getCode() {return code;}
-   public void setCode(Integer code) {
-       Integer oldCode = this.code;
-       this.code = code;
-       changeSupport.firePropertyChange("code", oldCode, code);
+   public Integer getID() {return id;}
+   public void setID(Integer id) {
+       Integer oldId = this.id;
+       this.id = id;
+       changeSupport.firePropertyChange("id", oldId, id);
    }
     
    public Integer getNum() {return num;}
@@ -95,7 +95,7 @@ public class ClassParam implements Serializable {
    @Override
    public int hashCode() {
        int hash = 0;
-       hash += (entityID != null ? entityID.hashCode() : 0);
+       hash += (id != null ? id.hashCode() : 0);
        return hash;
    }
 
@@ -106,7 +106,7 @@ public class ClassParam implements Serializable {
            return false;
        }
        ClassParam other = (ClassParam) object;
-       if ((this.entityID == null && other.entityID != null) || (this.entityID != null && !this.entityID.equals(other.entityID))) {
+       if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
           return false;
        }
        return true;
@@ -114,10 +114,10 @@ public class ClassParam implements Serializable {
 
    @Override
    public String toString() {
-        return "[\"" + code + 
+        return "[\"" + id + 
           "\",\"" + num + 
-          "\",\"" + classID.getCode() + 
-          "\",\"" + entityID.getCode() + "\"]";
+          "\",\"" + classID.getID() + 
+          "\",\"" + entityID.getID() + "\"]";
    }
     
    public void addPropertyChangeListener(PropertyChangeListener listener) {

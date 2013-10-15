@@ -45,7 +45,7 @@ public class EntityTypeView extends HttpServlet {
   private String RenderSelect() {
     String result = "";
     for(EntityType ml : entityTypeList) {
-      result = result + "<option value=\""+ ml.getCode() +"\">" + ml.getCode() + " - " + ml.getSense() +"</option>";
+      result = result + "<option value=\""+ ml.getID() +"\">" + ml.getID() + " - " + ml.getSense() +"</option>";
     }    
     return result;
   }

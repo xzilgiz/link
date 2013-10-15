@@ -27,15 +27,15 @@ import javax.persistence.FetchType;
 @Table(name = "ClassTypes", catalog = "", schema = "")
 @NamedQueries({
     @NamedQuery(name = "ClassType.findAll", query = "SELECT c FROM ClassType c"),
-    @NamedQuery(name = "ClassType.findByCode", query = "SELECT c FROM ClassType c WHERE c.code = :code")})
+    @NamedQuery(name = "ClassType.findByID", query = "SELECT c FROM ClassType c WHERE c.id = :id")})
 public class ClassType implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Code")
-    private Integer code;
+    @Column(name = "ID")
+    private Integer id;
     
     @Basic(optional = false)
     @Column(name = "Sense")
@@ -50,20 +50,20 @@ public class ClassType implements Serializable {
     public ClassType() {
     }
 
-    public ClassType(Integer code) {
-        this.code = code;
+    public ClassType(Integer id) {
+        this.id = id;
     }
 
-    public ClassType(Integer code, String sense) {
-        this.code = code;
+    public ClassType(Integer id, String sense) {
+        this.id = id;
         this.sense = sense;
     }
 
-    public Integer getCode() {return code;}
-    public void setCode(Integer code) {
-        Integer oldCode = this.code;
-        this.code = code;
-        changeSupport.firePropertyChange("code", oldCode, code);
+    public Integer getID() {return id;}
+    public void setID(Integer id) {
+        Integer oldId = this.id;
+        this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getSense() {return sense;}
@@ -82,7 +82,7 @@ public class ClassType implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (code != null ? code.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +93,7 @@ public class ClassType implements Serializable {
             return false;
         }
         ClassType other = (ClassType) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -101,7 +101,7 @@ public class ClassType implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + code + "\",\"" + sense + "\"]";
+        return "[\"" + id + "\",\"" + sense + "\"]";
     }
     
      public void addPropertyChangeListener(PropertyChangeListener listener) {

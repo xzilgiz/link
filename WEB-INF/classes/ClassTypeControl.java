@@ -18,15 +18,14 @@ public class ClassTypeControl {
         this.em = em;
     }
 
-    public ClassType createClassType(int code, String sense) {
-        ClassType et = new ClassType(code, sense);
+    public ClassType createClassType(int id, String sense) {
+        ClassType et = new ClassType(id, sense);
         em.persist(et);
         return et;
     }
 
-    public void removeClassType(int code) {
-        ClassParamControl classparamcontrol = new ClassParamControl(em);
-        ClassType et = em.find(ClassType.class, code);
+    public void removeClassType(int id) {
+        ClassType et = em.find(ClassType.class, id);
         if (et != null) {
             if (et.getClassParamList().isEmpty()) {
                 em.remove(et);
@@ -34,8 +33,8 @@ public class ClassTypeControl {
         }
     }
 
-    public ClassType changeClassType(int code, String sense) {
-        ClassType et = em.find(ClassType.class, code);
+    public ClassType changeClassType(int id, String sense) {
+        ClassType et = em.find(ClassType.class, id);
         if (et != null) {
             et.setSense(sense);
         }
@@ -48,10 +47,10 @@ public class ClassTypeControl {
         return query.getResultList();
     }
     
-    public ClassType findByCodeClassType(int code) {
+    public ClassType findByIDClassType(int id) {
         TypedQuery<ClassType> query =
-          em.createNamedQuery("ClassType.findByCode", ClassType.class);
-          query.setParameter("code", code);
+          em.createNamedQuery("ClassType.findByID", ClassType.class);
+          query.setParameter("id", id);
         return query.getResultList().get(0);
     }
 }

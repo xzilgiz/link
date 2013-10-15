@@ -31,7 +31,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Table(name = "EntityParams", catalog = "", schema = "")
 @NamedQueries({
     @NamedQuery(name = "EntityParam.findAll", query = "SELECT e FROM EntityParam e"),
-    @NamedQuery(name = "EntityParam.findByCode", query = "SELECT e FROM EntityParam e WHERE e.code = :code")
+    @NamedQuery(name = "EntityParam.findByID", query = "SELECT e FROM EntityParam e WHERE e.id = :id")
     })
 public class EntityParam implements Serializable {
     @Transient
@@ -40,8 +40,8 @@ public class EntityParam implements Serializable {
     
     @Id
     @Basic(optional = false)
-    @Column(name = "Code")
-    private Integer code;
+    @Column(name = "ID")
+    private Integer id;
     
     @Basic(optional = false)
     @Column(name = "Sense")
@@ -75,7 +75,7 @@ public class EntityParam implements Serializable {
     private String defaultValue;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name = "entityID")
+    @JoinColumn(name = "EntityID")
     private EntityType entityID;
     
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "entityParam")
@@ -84,13 +84,13 @@ public class EntityParam implements Serializable {
     public EntityParam() {
     }
 
-    public EntityParam(Integer code) {
-        this.code = code;
+    public EntityParam(Integer id) {
+        this.id = id;
     }
 
-    public EntityParam(EntityType entityID, Integer code, String sense, String mark, Integer num, String mask, String required, String enabled, String visible, String defaultValue) {
+    public EntityParam(EntityType entityID, Integer id, String sense, String mark, Integer num, String mask, String required, String enabled, String visible, String defaultValue) {
         this.entityID = entityID;
-        this.code = code;
+        this.id = id;
         this.sense = sense;
         this.mark = mark;
         this.num = num;
@@ -104,11 +104,11 @@ public class EntityParam implements Serializable {
     public EntityType getEntityID() {return entityID;}
     public void setEntityID(EntityType entityID) {this.entityID = entityID;}
 
-    public Integer getCode() {return code;}
-    public void setCode(Integer code) {
-        Integer oldCode = this.code;
-        this.code = code;
-        changeSupport.firePropertyChange("code", oldCode, code);
+    public Integer getID() {return id;}
+    public void setID(Integer id) {
+        Integer oldId = this.id;
+        this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getSense() {return sense;}
@@ -173,7 +173,7 @@ public class EntityParam implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (code != null ? code.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -184,7 +184,7 @@ public class EntityParam implements Serializable {
             return false;
         }
         EntityParam other = (EntityParam) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -192,8 +192,8 @@ public class EntityParam implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + entityID.getCode() + 
-          "\",\"" + code + 
+        return "[\"" + entityID.getID() + 
+          "\",\"" + id + 
           "\",\"" + sense + 
           "\",\"" + mark + 
           "\",\"" + num + 

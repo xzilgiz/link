@@ -44,7 +44,7 @@ public class ClassTypeView extends HttpServlet {
   private String RenderSelect() {
     String result = "";
     for(ClassType ml : classTypeList) {
-      result = result + "<option value=\""+ ml.getCode() +"\">" + ml.getCode() + " - " + ml.getSense() +"</option>";
+      result = result + "<option value=\""+ ml.getID() +"\">" + ml.getID() + " - " + ml.getSense() +"</option>";
     }    
     return result;
   }

@@ -18,25 +18,25 @@ public class EntityParamControl {
         this.em = em;
     }
 
-    public EntityParam createEntityParam(int entityID, int code, String sense, String mark, int num, String mask, String required, String enabled, String visible, String defaultValue) {        
+    public EntityParam createEntityParam(int entityID, int id, String sense, String mark, int num, String mask, String required, String enabled, String visible, String defaultValue) {        
         EntityTypeControl entitytypecontrol = new EntityTypeControl(em);
-        EntityParam et = new EntityParam(entitytypecontrol.findByCodeEntityType(entityID), code, sense, mark, num, mask, required, enabled, visible, defaultValue);
+        EntityParam et = new EntityParam(entitytypecontrol.findByIDEntityType(entityID), id, sense, mark, num, mask, required, enabled, visible, defaultValue);
         em.persist(et);
         return et;
     }
 
-    public void removeEntityParam(int code) {
-        EntityParam et = findByCodeEntityParam(code);
+    public void removeEntityParam(int id) {
+        EntityParam et = findByIDEntityParam(id);
         if (et != null) {
             em.remove(et);
         }
     }
 
-    public EntityParam changeEntityParam(int entityID, int code, String sense, String mark, int num, String mask, String required, String enabled, String visible, String defaultValue) {
-        EntityParam et = findByCodeEntityParam(code);
+    public EntityParam changeEntityParam(int entityID, int id, String sense, String mark, int num, String mask, String required, String enabled, String visible, String defaultValue) {
+        EntityParam et = findByIDEntityParam(id);
         if (et != null) {
             EntityTypeControl entitytypecontrol = new EntityTypeControl(em);
-            et.setEntityID(entitytypecontrol.findByCodeEntityType(entityID));
+            et.setEntityID(entitytypecontrol.findByIDEntityType(entityID));
             et.setSense(sense);
             et.setMark(mark);
             et.setRequired(required);
@@ -50,10 +50,10 @@ public class EntityParamControl {
         return et;
     }
 
-    public EntityParam findByCodeEntityParam(int code) {
+    public EntityParam findByIDEntityParam(int id) {
         TypedQuery<EntityParam> query =
-          em.createNamedQuery("EntityParam.findByCode", EntityParam.class);
-          query.setParameter("code", code);
+          em.createNamedQuery("EntityParam.findByID", EntityParam.class);
+          query.setParameter("id", id);
         return query.getResultList().get(0);
     }
 

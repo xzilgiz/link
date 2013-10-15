@@ -20,28 +20,28 @@ public class MainObjectControl {
 
     public MainObject createMainObject(int id, int classID) {
         ClassTypeControl classtypecontrol = new ClassTypeControl(em);
-        MainObject et = new MainObject(id, classtypecontrol.findByCodeClassType(classID));
+        MainObject et = new MainObject(id, classtypecontrol.findByIDClassType(classID));
         em.persist(et);
         return et;
     }
 
     public void removeMainObject(int id) {
-        MainObject et = findByCodeMainObject(id);
+        MainObject et = findByIDMainObject(id);
         if (et != null) {
             em.remove(et);
         }
     }
 
     public MainObject changeMainObject(int id, int classID) {
-        MainObject et = findByCodeMainObject(id);
+        MainObject et = findByIDMainObject(id);
         if (et != null) {
             ClassTypeControl classtypecontrol = new ClassTypeControl(em);
-            et.setClassID(classtypecontrol.findByCodeClassType(classID));
+            et.setClassID(classtypecontrol.findByIDClassType(classID));
         }
         return et;
     }
 
-    public MainObject findByCodeMainObject(int id) {
+    public MainObject findByIDMainObject(int id) {
         TypedQuery<MainObject> query =
           em.createNamedQuery("MainObject.findById", MainObject.class);
           query.setParameter("id", id);

@@ -18,16 +18,14 @@ public class EntityTypeControl {
         this.em = em;
     }
 
-    public EntityType createEntityType(int code, String sense, String required) {
-        EntityType et = new EntityType(code, sense, required);
+    public EntityType createEntityType(int id, String sense, String required) {
+        EntityType et = new EntityType(id, sense, required);
         em.persist(et);
         return et;
     }
 
-    public void removeEntityType(int code) {
-        EntityParamControl entityparamcontrol = new EntityParamControl(em);
-        EntityType et = em.find(EntityType.class, code);
-
+    public void removeEntityType(int id) {
+        EntityType et = em.find(EntityType.class, id);
         if (et != null) {
             if (et.getEntityParamList().isEmpty()) {
                 em.remove(et);
@@ -35,8 +33,8 @@ public class EntityTypeControl {
         }
     }
 
-    public EntityType changeEntityType(int code, String sense, String required) {
-        EntityType et = em.find(EntityType.class, code);
+    public EntityType changeEntityType(int id, String sense, String required) {
+        EntityType et = em.find(EntityType.class, id);
         if (et != null) {
             et.setSense(sense);
             et.setRequired(required);
@@ -50,10 +48,10 @@ public class EntityTypeControl {
         return query.getResultList();
     }
     
-    public EntityType findByCodeEntityType(int code) {
+    public EntityType findByIDEntityType(int id) {
         TypedQuery<EntityType> query =
-          em.createNamedQuery("EntityType.findByCode", EntityType.class);
-          query.setParameter("code", code);
+          em.createNamedQuery("EntityType.findByID", EntityType.class);
+          query.setParameter("id", id);
         return query.getResultList().get(0);
     }
 

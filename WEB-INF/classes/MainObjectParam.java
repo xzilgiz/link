@@ -3,9 +3,11 @@
  * and open the template in the editor.
  */
  
-
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
 
 /**
  *
@@ -22,36 +26,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MainObjectParams", catalog = "", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "MainObjectParam.findAll", query = "SELECT m FROM MainObjectParam m"),
-    @NamedQuery(name = "MainObjectParam.findByParamID", query = "SELECT m FROM MainObjectParam m WHERE m.paramID = :paramID"),
-    @NamedQuery(name = "MainObjectParam.findByValue", query = "SELECT m FROM MainObjectParam m WHERE m.value = :value")})
 public class MainObjectParam implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
+
     @Id
     @JoinColumn(name = "MainObjectID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private MainObject mainObjectID;
 
     @Id
-    @JoinColumns({
-        @JoinColumn(name = "ClassID", referencedColumnName = "ClassID"),
-        @JoinColumn(name = "EntityID", referencedColumnName = "EntityID")})
-    @ManyToOne(optional = false)
-    private ClassParam classParam;
-
-    @Id
-    @JoinColumns({
-        @JoinColumn(name = "EntityID", referencedColumnName = "EntityID"),
-        @JoinColumn(name = "ParamID", referencedColumnName = "Code", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private EntityParam entityParam;
+    @JoinColumn(name = "EntityParamID", referencedColumnName = "ID")
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    private EntityParam entityParamID;
     
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ParamID")
-    private Integer paramID;
-        
     @Basic(optional = false)
     @Column(name = "Value")
     private String value;
@@ -59,34 +48,33 @@ public class MainObjectParam implements Serializable {
     public MainObjectParam() {
     }
 
-    public MainObjectParam(Integer paramID) {
-        this.paramID = paramID;
+    public MainObjectParam(MainObject mainObjectID) {
+        this.mainObjectID = mainObjectID;
     }
 
-    public MainObjectParam(Integer paramID, String value) {
-        this.paramID = paramID;
+    public MainObjectParam(MainObject mainObjectID, EntityParam entityParamID, String value) {
+        this.mainObjectID = mainObjectID;
+        this.entityParamID = entityParamID;
         this.value = value;
     }
 
-    public Integer getParamID() {return paramID;}
-    public void setParamID(Integer paramID) {this.paramID = paramID;}
-
-    public String getValue() {return value;}
-    public void setValue(String value) {this.value = value;}
-
     public MainObject getMainObjectID() {return mainObjectID;}
     public void setMainObjectID(MainObject mainObjectID) {this.mainObjectID = mainObjectID;}
+        
+    public EntityParam getEntityParamID() {return entityParamID;}
+    public void setEntityParamID(EntityParam entityParamID) {this.entityParamID = entityParamID;}
 
-    public ClassParam getClassParam() {return classParam;}
-    public void setClassParam(ClassParam classParam) {this.classParam = classParam;}
-
-    public EntityParam getEntityParam() {return entityParam;}
-    public void setEntityParam(EntityParam entityParam) {this.entityParam = entityParam;}
+    public String getValue() {return value;}
+    public void setValue(String value) {
+        String oldValue = this.value;
+        this.value = value;
+        changeSupport.firePropertyChange("value", oldValue, value);
+    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paramID != null ? paramID.hashCode() : 0);
+        hash += (mainObjectID != null ? mainObjectID.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +85,7 @@ public class MainObjectParam implements Serializable {
             return false;
         }
         MainObjectParam other = (MainObjectParam) object;
-        if ((this.paramID == null && other.paramID != null) || (this.paramID != null && !this.paramID.equals(other.paramID))) {
+        if ((this.mainObjectID == null && other.mainObjectID != null) || (this.mainObjectID != null && !this.mainObjectID.equals(other.mainObjectID))) {
             return false;
         }
         return true;
@@ -105,7 +93,7 @@ public class MainObjectParam implements Serializable {
 
     @Override
     public String toString() {
-        return "examples.entites.MainObjectParam[ paramID=" + paramID + " ]";
+        return "[\"" + mainObjectID.getID() + "\",\"" + entityParamID.getID() + "\",\"" + value + "\"]";
     }
     
 }

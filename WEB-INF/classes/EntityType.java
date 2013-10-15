@@ -29,15 +29,15 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Table(name = "EntityTypes", catalog = "", schema = "")
 @NamedQueries({
     @NamedQuery(name = "EntityType.findAll", query = "SELECT e FROM EntityType e"),
-    @NamedQuery(name = "EntityType.findByCode", query = "SELECT e FROM EntityType e WHERE e.code = :code")})
+    @NamedQuery(name = "EntityType.findByID", query = "SELECT e FROM EntityType e WHERE e.id = :id")})
 public class EntityType implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Code")
-    private Integer code;
+    @Column(name = "ID")
+    private Integer id;
     
     @Basic(optional = false)
     @Column(name = "Sense")
@@ -47,27 +47,27 @@ public class EntityType implements Serializable {
     @Column(name = "Required")
     private String required;
         
-    @OneToMany(mappedBy = "entityID", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "EntityID", fetch = FetchType.LAZY)
     private List<EntityParam> entityParamList;
     
     public EntityType() {
     }
 
-    public EntityType(Integer code) {
-        this.code = code;
+    public EntityType(Integer id) {
+        this.id = id;
     }
 
-    public EntityType(Integer code, String sense, String required) {
-        this.code = code;
+    public EntityType(Integer id, String sense, String required) {
+        this.id = id;
         this.sense = sense;
         this.required = required;
     }
 
-    public Integer getCode() {return code;}
-    public void setCode(Integer code) {
-        Integer oldCode = this.code;
-        this.code = code;
-        changeSupport.firePropertyChange("code", oldCode, code);
+    public Integer getID() {return id;}
+    public void setID(Integer id) {
+        Integer oldId = this.id;
+        this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getSense() {return sense;}
@@ -93,7 +93,7 @@ public class EntityType implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (code != null ? code.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +104,7 @@ public class EntityType implements Serializable {
             return false;
         }
         EntityType other = (EntityType) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ public class EntityType implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + code + "\",\"" + sense + "\",\"" + required + "\"]";
+        return "[\"" + id + "\",\"" + sense + "\",\"" + required + "\"]";
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {

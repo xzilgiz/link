@@ -48,8 +48,8 @@ public class MainObject implements Serializable {
     //@Column(name = "Date")
     //private String date;
     
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "mainObjectID")
-    //private List<MainObjectParam> mainObjectParamList;
+    @OneToMany(mappedBy = "mainObjectID", fetch = FetchType.LAZY)
+    private List<MainObjectParam> mainObjectParamList;
 
     public MainObject() {
     }
@@ -64,8 +64,8 @@ public class MainObject implements Serializable {
     //    this.date = date;
     //}
 
-    public Integer getId() {return id;}
-    public void setId(Integer id) {
+    public Integer getID() {return id;}
+    public void setID(Integer id) {
         Integer oldId = this.id;
         this.id = id;
         changeSupport.firePropertyChange("id", oldId, id);
@@ -77,8 +77,8 @@ public class MainObject implements Serializable {
     public ClassType getClassID() {return classID;}
     public void setClassID(ClassType classID) {this.classID = classID;}
 
-    //public List<MainObjectParam> getMainObjectParamList() {return mainObjectParamList;}
-    //public void setMainObjectParamList(List<MainObjectParam> mainObjectParamList) {this.mainObjectParamList = mainObjectParamList;}
+    public List<MainObjectParam> getMainObjectParamList() {return mainObjectParamList;}
+    public void setMainObjectParamList(List<MainObjectParam> mainObjectParamList) {this.mainObjectParamList = mainObjectParamList;}
 
     @Override
     public int hashCode() {
@@ -102,7 +102,7 @@ public class MainObject implements Serializable {
 
     @Override
     public String toString() {
-        return "[\"" + id + "\",\"" + classID.getCode() + "\"]";
+        return "[\"" + id + "\",\"" + classID.getID() + "\"]";
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {

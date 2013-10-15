@@ -18,38 +18,38 @@ public class ClassParamControl {
         this.em = em;
     }
 
-    public ClassParam createClassParam(int code, int num, int classID, int entityID) {
+    public ClassParam createClassParam(int id, int num, int classID, int entityID) {
         ClassTypeControl classtypecontrol = new ClassTypeControl(em);
         EntityTypeControl entitytypecontrol = new EntityTypeControl(em);
-        ClassParam et = new ClassParam(code, num, classtypecontrol.findByCodeClassType(classID), entitytypecontrol.findByCodeEntityType(entityID));
+        ClassParam et = new ClassParam(id, num, classtypecontrol.findByIDClassType(classID), entitytypecontrol.findByIDEntityType(entityID));
         em.persist(et);
         return et;
     }
 
-    public void removeClassParam(int code) {
-        ClassParam et = findByCodeClassParam(code);
+    public void removeClassParam(int id) {
+        ClassParam et = findByIDClassParam(id);
         if (et != null) {
             em.remove(et);
         }
     }
 
-    public ClassParam changeClassParam(int code, int num, int classID, int entityID) {
-        ClassParam et = findByCodeClassParam(code);
+    public ClassParam changeClassParam(int id, int num, int classID, int entityID) {
+        ClassParam et = findByIDClassParam(id);
         if (et != null) {
             ClassTypeControl classtypecontrol = new ClassTypeControl(em);
             EntityTypeControl entitytypecontrol = new EntityTypeControl(em);
 
             et.setNum(num);
-            et.setClassID(classtypecontrol.findByCodeClassType(classID));
-            et.setEntityID(entitytypecontrol.findByCodeEntityType(entityID));            
+            et.setClassID(classtypecontrol.findByIDClassType(classID));
+            et.setEntityID(entitytypecontrol.findByIDEntityType(entityID));            
         }
         return et;
     }
 
-    public ClassParam findByCodeClassParam(int code) {
+    public ClassParam findByIDClassParam(int id) {
         TypedQuery<ClassParam> query =
-          em.createNamedQuery("ClassParam.findByCode", ClassParam.class);
-          query.setParameter("code", code);
+          em.createNamedQuery("ClassParam.findByID", ClassParam.class);
+          query.setParameter("id", id);
         return query.getResultList().get(0);
     }
 
