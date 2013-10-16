@@ -44,8 +44,8 @@ public class ClassType implements Serializable {
     @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)
     private List<ClassParam> classParamList;
     
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "classID")
-    //private List<MainObject> mainObjectList;
+    @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)
+    private List<MainObject> mainObjectList;
     
     public ClassType() {
     }
@@ -76,8 +76,8 @@ public class ClassType implements Serializable {
     public List<ClassParam> getClassParamList() {return classParamList;}
     public void setClassParamList(List<ClassParam> classParamList) {this.classParamList = classParamList;}
     
-    //public List<MainObject> getMainObjectList() {return mainObjectList;}
-    //public void setMainObjectList(List<MainObject> mainObjectList) {this.mainObjectList = mainObjectList;}
+    public List<MainObject> getMainObjectList() {return mainObjectList;}
+    public void setMainObjectList(List<MainObject> mainObjectList) {this.mainObjectList = mainObjectList;}
 
     @Override
     public int hashCode() {

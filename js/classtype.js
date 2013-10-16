@@ -67,5 +67,23 @@ $(document).ready(function() {
           drawtable();
         });
       });
+
+      $('#find').click(function(event) {
+        var js_code=$('#code').val();
+     
+        $.ajax({url: "ClassTypeView?action=find&code="+js_code, cache: false}).done(
+          function( html ) {
+            $('#findcontent').html(html);
+          });
+      });
+
+      $('#add').click(function(event) {
+        var js_code=$('#code').val();
+     
+        $.ajax({url: "ClassTypeView?action=add&code="+js_code, cache: false}).done(
+          function( html ) {
+            $('#findcontent').html(html);
+          });
+      });
   });
 });

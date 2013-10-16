@@ -14,7 +14,8 @@ public class ClassTypeView extends HttpServlet {
   private static javax.persistence.EntityManager entityManager;
   private static java.util.List<ClassType> classTypeList;
   private static javax.persistence.Query classTypeQuery;
-
+  private static ClassType classtype;
+  
   private static String action;
   private static String code;
   private static String sense;
@@ -49,6 +50,45 @@ public class ClassTypeView extends HttpServlet {
     return result;
   }
   
+  //Вывод объетов классов
+  private String RenderFind() {
+    String result = "";
+    for(MainObject ml : classtype.getMainObjectList()) {
+       //Ходим по параметрам объектов
+       for(MainObjectParam mp : ml.getMainObjectParamList()) {
+         //Название сущности
+         result = result + "<br><h3>" + mp.getEntityParamID().getEntityID().getSense() + "</h3>";
+         //Параметры сущности
+         //Если сущность обязатена (т.е. для краткого вывода)
+         if(mp.getEntityParamID().getEntityID().getRequired().equals("y")) {
+           result = result + "  " + mp.getEntityParamID().getSense();
+           result = result + mp.getValue() + "<br>";
+         } else { //Подробно
+           result = result + "  " + mp.getEntityParamID().getSense();
+           result = result + mp.getValue() + "<br>";
+         }
+       }
+    }    
+    return result;
+  }
+
+  //Вывод формы заполнения объкта
+  private String RenderAdd() {
+    String result = "";
+    //Ходим по параметрам класса
+    for(ClassParam ml : classtype.getClassParamList()) {
+       result = result + "<br><h3>" + ml.getEntityID().getSense() + "</h3>";
+       //Ходим по параметрам сущностей
+       for(EntityParam mp : ml.getEntityID().getEntityParamList()) {
+         result = result + 
+           "  " + mp.getSense() + 
+           " <input type=\"text\" name=\"" + mp.getMark() + 
+           "\" value=\"" + mp.getDefaultValue() + "\"><br>";
+       }
+    }    
+    return result;
+  }
+  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String ActionNote = "";
     action = request.getParameter("action");
@@ -61,11 +101,27 @@ public class ClassTypeView extends HttpServlet {
       response.setContentType("text/plain");  
       //response.setCharacterEncoding("UTF-8"); 
       response.getWriter().write(Render()); 
+      
     } else if (action.toString().equals("select")){
       classTypeList = classtypecontrol.findAllClassTypes();
       response.setContentType("text/plain");  
       //response.setCharacterEncoding("UTF-8"); 
       response.getWriter().write(RenderSelect());
+      
+    } else if (action.toString().equals("find")){
+      code = request.getParameter("code");
+      classtype = classtypecontrol.findByIDClassType(Integer.parseInt(code));
+      response.setContentType("text/plain");  
+      //response.setCharacterEncoding("UTF-8"); 
+      response.getWriter().write(RenderFind());
+      
+    } else if (action.toString().equals("add")){
+      code = request.getParameter("code");
+      classtype = classtypecontrol.findByIDClassType(Integer.parseInt(code));
+      response.setContentType("text/plain");  
+      //response.setCharacterEncoding("UTF-8"); 
+      response.getWriter().write(RenderAdd());  
+      
     } else {
       code = request.getParameter("code");
       sense = request.getParameter("sense");
