@@ -53,28 +53,34 @@ public class ClassTypeView extends HttpServlet {
   //Вывод объетов классов
   private String RenderFind() {
     String result = "";
-    String title_entity = "";
-    String old_title_entity = "";
-    for(MainObject ml : classtype.getMainObjectList()) {
-       //Ходим по параметрам объектов
-       for(MainObjectParam mp : ml.getMainObjectParamList()) {
-         //Название сущности
-         title_entity = mp.getEntityParamID().getEntityID().getSense();
-         if(!title_entity.equals(old_title_entity)) {
-           result = result + "<br><h3>"+ ml.getID()+ " | " + title_entity + "</h3>";
-           old_title_entity = title_entity;
+    boolean noValue = false;
+    //Список объектов с выбранным классом
+    for(MainObject mo : classtype.getMainObjectList()) {
+      //Составляем шаблон класса 
+      for(ClassParam cp : classtype.getClassParamList()) {
+        //Название сущности
+        result = result + "<br><h4>" + cp.getEntityID().getSense() + "</h4>";
+        //Ходим по параметрам сущности
+        for(EntityParam ep : cp.getEntityID().getEntityParamList()) {
+          result = result + ep.getSense() + " : ";
+          noValue = false;
+          //Определяем значение параметра
+          for(MainObjectParam mop : mo.getMainObjectParamList()) {
+            if(mop.getEntityParamID().getID() == ep.getID()) {
+              result = result + mop.getValue();
+              noValue = true;
+            }
+          }
+          
+          if(!noValue) {result = result + " -";}
+          
+          result = result + "<br>";
         }
-         //Параметры сущности
-         //Если сущность обязатена (т.е. для краткого вывода)
-         if(mp.getEntityParamID().getEntityID().getRequired().equals("y")) {
-           result = result + "  " + mp.getEntityParamID().getSense();
-           result = result + " : " + mp.getValue() + "<br>";
-         } else { //Подробно
-           result = result + "  " + mp.getEntityParamID().getSense();
-           result = result + " : " + mp.getValue() + "<br>";
-         }
-       }
-    }    
+       
+      }
+        
+    }
+   
     return result;
   }
 
@@ -82,12 +88,12 @@ public class ClassTypeView extends HttpServlet {
   private String RenderAdd() {
     String result = "";
     
-    result = result + "<form action=\"ClassTypeView\" method=\"post\">";
+    result = result + "<form id=\"AddObjectForm\" action=\"ClassTypeView\" method=\"post\">";
     result = result + " <input type=\"hidden\" name=\"" + "classID" + "\" value=\"" + classtype.getID() + "\">";
     result = result + "ID <input type=\"text\" name=\"" + "objectID" + "\" value=\"" + "" + "\"><br>";
     //Ходим по параметрам класса
     for(ClassParam ml : classtype.getClassParamList()) {
-       result = result + "<br><h3>" + ml.getEntityID().getSense() + "</h3>";
+       result = result + "<br><h4>" + ml.getEntityID().getSense() + "</h4>";
        //Ходим по параметрам сущностей
        for(EntityParam mp : ml.getEntityID().getEntityParamList()) {
          result = result + 

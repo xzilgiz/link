@@ -36,6 +36,7 @@ $(document).ready(function() {
       });
 
 	  //////////////// Event Operation -->
+      
       $('#ins').click(function(event) {
         var js_action='ins';
         var js_code=$('#code').val();
@@ -83,6 +84,17 @@ $(document).ready(function() {
         $.ajax({url: "ClassTypeView?action=add&code="+js_code, cache: false}).done(
           function( html ) {
             $('#findcontent').html(html);
+            $('#add_object').click(function(event) {
+	          $("#AddObjectForm").ajaxForm(function() {
+
+	            var js_code=$('#code').val();
+     
+                $.ajax({url: "ClassTypeView?action=find&code="+js_code, cache: false}).done(
+                  function( html ) {
+                    $('#findcontent').html(html);
+                  });
+	          });
+            });
           });
       });
   });
