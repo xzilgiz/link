@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.FetchType;
+import javax.persistence.*;
 
 /**
  *
@@ -28,7 +29,7 @@ import javax.persistence.FetchType;
 @Entity
 @Table(name = "MainObjects", catalog = "", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "MainObject.findAll", query = "SELECT m FROM MainObject m"),
+    @NamedQuery(name = "MainObject.findAll", query = "SELECT m FROM MainObject m ORDER BY m.id"),
     @NamedQuery(name = "MainObject.findById", query = "SELECT m FROM MainObject m WHERE m.id = :id")})
 public class MainObject implements Serializable {
     @Transient
@@ -48,9 +49,10 @@ public class MainObject implements Serializable {
     //@Column(name = "Date")
     //private String date;
     
-    @OneToMany(mappedBy = "mainObjectID", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mainObjectID", fetch = FetchType.LAZY)  
+    @OrderColumn(name="entityParamID")
     private List<MainObjectParam> mainObjectParamList;
-
+//
     public MainObject() {
     }
 

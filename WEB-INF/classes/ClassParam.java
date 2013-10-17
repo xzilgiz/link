@@ -28,7 +28,7 @@ import javax.persistence.FetchType;
 @Entity
 @Table(name = "ClassParams", catalog = "", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ClassParam.findAll", query = "SELECT c FROM ClassParam c"),
+    @NamedQuery(name = "ClassParam.findAll", query = "SELECT c FROM ClassParam c ORDER BY c.id"),
     @NamedQuery(name = "ClassParam.findByID", query = "SELECT c FROM ClassParam c WHERE c.id = :id")})
 public class ClassParam implements Serializable {
     @Transient
@@ -49,9 +49,10 @@ public class ClassParam implements Serializable {
     private ClassType classID;
     
     @JoinColumn(name = "EntityID", referencedColumnName = "ID")
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @ManyToOne(cascade= {CascadeType.REFRESH})
     private EntityType entityID;
     
+    //, fetch=FetchType.LAZY
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "classParam")
     //private List<MainObjectParam> mainObjectParamList;
 

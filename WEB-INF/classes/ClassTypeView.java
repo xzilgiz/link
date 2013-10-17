@@ -53,19 +53,25 @@ public class ClassTypeView extends HttpServlet {
   //Вывод объетов классов
   private String RenderFind() {
     String result = "";
+    String title_entity = "";
+    String old_title_entity = "";
     for(MainObject ml : classtype.getMainObjectList()) {
        //Ходим по параметрам объектов
        for(MainObjectParam mp : ml.getMainObjectParamList()) {
          //Название сущности
-         result = result + "<br><h3>" + mp.getEntityParamID().getEntityID().getSense() + "</h3>";
+         title_entity = mp.getEntityParamID().getEntityID().getSense();
+         if(!title_entity.equals(old_title_entity)) {
+           result = result + "<br><h3>"+ ml.getID()+ " | " + title_entity + "</h3>";
+           old_title_entity = title_entity;
+        }
          //Параметры сущности
          //Если сущность обязатена (т.е. для краткого вывода)
          if(mp.getEntityParamID().getEntityID().getRequired().equals("y")) {
            result = result + "  " + mp.getEntityParamID().getSense();
-           result = result + mp.getValue() + "<br>";
+           result = result + " : " + mp.getValue() + "<br>";
          } else { //Подробно
            result = result + "  " + mp.getEntityParamID().getSense();
-           result = result + mp.getValue() + "<br>";
+           result = result + " : " + mp.getValue() + "<br>";
          }
        }
     }    
@@ -75,6 +81,10 @@ public class ClassTypeView extends HttpServlet {
   //Вывод формы заполнения объкта
   private String RenderAdd() {
     String result = "";
+    
+    result = result + "<form action=\"ClassTypeView\" method=\"post\">";
+    result = result + " <input type=\"hidden\" name=\"" + "classID" + "\" value=\"" + classtype.getID() + "\">";
+    result = result + "ID <input type=\"text\" name=\"" + "objectID" + "\" value=\"" + "" + "\"><br>";
     //Ходим по параметрам класса
     for(ClassParam ml : classtype.getClassParamList()) {
        result = result + "<br><h3>" + ml.getEntityID().getSense() + "</h3>";
@@ -85,7 +95,10 @@ public class ClassTypeView extends HttpServlet {
            " <input type=\"text\" name=\"" + mp.getMark() + 
            "\" value=\"" + mp.getDefaultValue() + "\"><br>";
        }
-    }    
+    }
+    
+    result = result + "<input type=\"submit\" id=\"add_object\" value=\"Add\"/>";
+    result = result + "</form>";
     return result;
   }
   
@@ -154,7 +167,40 @@ public class ClassTypeView extends HttpServlet {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
+    //Считываем тип операции
+    String action = request.getParameter("action");
+    String classID = request.getParameter("classID");
+    String objectID = request.getParameter("objectID");
+    entityManager = javax.persistence.Persistence.createEntityManagerFactory("jdbc:sqlite:newd.dbPU").createEntityManager();
+    
+      ClassTypeControl ctc = new ClassTypeControl(entityManager);
+      MainObjectControl moc = new MainObjectControl(entityManager);
+      
+      entityManager.getTransaction().begin();
+      //Определяем тип класса
+      ClassType ct = ctc.findByIDClassType(Integer.parseInt(classID));
+      //Создаём объект
+      MainObject mo = moc.createMainObject(Integer.parseInt(objectID), ct.getID());
+      java.util.List<MainObjectParam> mopList;
+      //Налолняем объект параметрами
+      //Обходим параметры класса, т.е. сущности
+      for(ClassParam cplist : ct.getClassParamList()) {
+        //Обходим параметры сущности
+        for(EntityParam eplist : cplist.getEntityID().getEntityParamList()) {
+          //Проверяем пришёл ли параметр
+          String aparam = request.getParameter(eplist.getMark());
+          //aparam != null & 
+          if(!aparam.equals("")) {
+            //Создаём новый параметр объекта
+            MainObjectParam mop = new MainObjectParam(mo, eplist, aparam);
+            entityManager.persist(mop);
+          }
+        }
+      }
+
+      entityManager.getTransaction().commit();
+          
+    entityManager.close();
   }
 
 }

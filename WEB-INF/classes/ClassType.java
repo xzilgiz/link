@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.FetchType;
+import javax.persistence.*;
 
 /**
  *
@@ -26,7 +27,7 @@ import javax.persistence.FetchType;
 @Entity
 @Table(name = "ClassTypes", catalog = "", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ClassType.findAll", query = "SELECT c FROM ClassType c"),
+    @NamedQuery(name = "ClassType.findAll", query = "SELECT c FROM ClassType c ORDER BY c.id"),
     @NamedQuery(name = "ClassType.findByID", query = "SELECT c FROM ClassType c WHERE c.id = :id")})
 public class ClassType implements Serializable {
     @Transient
@@ -42,6 +43,7 @@ public class ClassType implements Serializable {
     private String sense;
     
     @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)
+    @OrderColumn(name="num")
     private List<ClassParam> classParamList;
     
     @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)

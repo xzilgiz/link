@@ -30,7 +30,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Entity
 @Table(name = "EntityParams", catalog = "", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "EntityParam.findAll", query = "SELECT e FROM EntityParam e"),
+    @NamedQuery(name = "EntityParam.findAll", query = "SELECT e FROM EntityParam e ORDER BY e.id"),
     @NamedQuery(name = "EntityParam.findByID", query = "SELECT e FROM EntityParam e WHERE e.id = :id")
     })
 public class EntityParam implements Serializable {

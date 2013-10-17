@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.FetchType;
+import javax.persistence.*;
 
 /**
  *
@@ -39,6 +40,7 @@ public class MainObjectParam implements Serializable {
     @Id
     @JoinColumn(name = "EntityParamID", referencedColumnName = "ID")
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @OrderBy(value="num")
     private EntityParam entityParamID;
     
     @Basic(optional = false)

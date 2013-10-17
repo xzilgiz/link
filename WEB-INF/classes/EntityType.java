@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.FetchType;
+import javax.persistence.*;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -28,7 +29,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Entity
 @Table(name = "EntityTypes", catalog = "", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "EntityType.findAll", query = "SELECT e FROM EntityType e"),
+    @NamedQuery(name = "EntityType.findAll", query = "SELECT e FROM EntityType e ORDER BY e.id"),
     @NamedQuery(name = "EntityType.findByID", query = "SELECT e FROM EntityType e WHERE e.id = :id")})
 public class EntityType implements Serializable {
     @Transient
@@ -48,6 +49,7 @@ public class EntityType implements Serializable {
     private String required;
         
     @OneToMany(mappedBy = "EntityID", fetch = FetchType.LAZY)
+    @OrderColumn(name="num")
     private List<EntityParam> entityParamList;
     
     public EntityType() {
