@@ -187,7 +187,7 @@ public class ClassTypeView extends HttpServlet {
       ClassType ct = ctc.findByIDClassType(Integer.parseInt(classID));
       //Создаём объект
       MainObject mo = moc.createMainObject(Integer.parseInt(objectID), ct.getID());
-      java.util.List<MainObjectParam> mopList;
+      //java.util.List<MainObjectParam> mopList;
       //Налолняем объект параметрами
       //Обходим параметры класса, т.е. сущности
       for(ClassParam cplist : ct.getClassParamList()) {
@@ -195,8 +195,7 @@ public class ClassTypeView extends HttpServlet {
         for(EntityParam eplist : cplist.getEntityID().getEntityParamList()) {
           //Проверяем пришёл ли параметр
           String aparam = request.getParameter(eplist.getMark());
-          //aparam != null & 
-          if(!aparam.equals("")) {
+          if(aparam != null && !aparam.equals("")) {
             //Создаём новый параметр объекта
             MainObjectParam mop = new MainObjectParam(mo, eplist, aparam);
             entityManager.persist(mop);

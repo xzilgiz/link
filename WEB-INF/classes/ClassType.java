@@ -43,7 +43,7 @@ public class ClassType implements Serializable {
     private String sense;
     
     @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)
-    @OrderColumn(name="num")
+    //@OrderColumn(name="num")
     private List<ClassParam> classParamList;
     
     @OneToMany(mappedBy = "classID", fetch = FetchType.LAZY)

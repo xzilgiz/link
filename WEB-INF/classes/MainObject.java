@@ -50,7 +50,7 @@ public class MainObject implements Serializable {
     //private String date;
     
     @OneToMany(mappedBy = "mainObjectID", fetch = FetchType.LAZY)  
-    @OrderColumn(name="entityParamID")
+    //@OrderColumn(name="entityParamID")
     private List<MainObjectParam> mainObjectParamList;
 //
     public MainObject() {

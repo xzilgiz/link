@@ -49,7 +49,7 @@ public class EntityType implements Serializable {
     private String required;
         
     @OneToMany(mappedBy = "EntityID", fetch = FetchType.LAZY)
-    @OrderColumn(name="num")
+    //@OrderColumn(name="num")
     private List<EntityParam> entityParamList;
     
     public EntityType() {

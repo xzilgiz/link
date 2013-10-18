@@ -49,7 +49,7 @@ public class ClassParam implements Serializable {
     private ClassType classID;
     
     @JoinColumn(name = "EntityID", referencedColumnName = "ID")
-    @ManyToOne(cascade= {CascadeType.REFRESH})
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     private EntityType entityID;
     
     //, fetch=FetchType.LAZY
