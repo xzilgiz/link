@@ -59,7 +59,7 @@ public class ClassTypeView extends HttpServlet {
       //Составляем шаблон класса 
       for(ClassParam cp : classtype.getClassParamList()) {
         //Название сущности
-        result = result + "<br><h4>" + cp.getEntityID().getSense() + "</h4>";
+        result = result + "<h4>" + mo.getID() + " | " + cp.getEntityID().getSense() + "</h4>";
         //Ходим по параметрам сущности
         for(EntityParam ep : cp.getEntityID().getEntityParamList()) {
           result = result + ep.getSense() + " : ";
@@ -90,10 +90,9 @@ public class ClassTypeView extends HttpServlet {
     
     result = result + "<form id=\"AddObjectForm\" action=\"ClassTypeView\" method=\"post\">";
     result = result + " <input type=\"hidden\" name=\"" + "classID" + "\" value=\"" + classtype.getID() + "\">";
-    result = result + "ID <input type=\"text\" name=\"" + "objectID" + "\" value=\"" + "" + "\"><br>";
     //Ходим по параметрам класса
     for(ClassParam ml : classtype.getClassParamList()) {
-       result = result + "<br><h4>" + ml.getEntityID().getSense() + "</h4>";
+       result = result + "<h4>" + ml.getEntityID().getSense() + "</h4>";
        //Ходим по параметрам сущностей
        for(EntityParam mp : ml.getEntityID().getEntityParamList()) {
          result = result + 
@@ -186,7 +185,7 @@ public class ClassTypeView extends HttpServlet {
       //Определяем тип класса
       ClassType ct = ctc.findByIDClassType(Integer.parseInt(classID));
       //Создаём объект
-      MainObject mo = moc.createMainObject(Integer.parseInt(objectID), ct.getID());
+      MainObject mo = moc.createMainObject(ct.getID());
       //java.util.List<MainObjectParam> mopList;
       //Налолняем объект параметрами
       //Обходим параметры класса, т.е. сущности

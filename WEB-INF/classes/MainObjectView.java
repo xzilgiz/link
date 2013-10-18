@@ -65,7 +65,7 @@ public class MainObjectView extends HttpServlet {
     if(action.toString().equals("ins")) {
       //INSERT
       entityManager.getTransaction().begin();
-      mainobjectcontrol.createMainObject(Integer.parseInt(id), Integer.parseInt(classID));
+      mainobjectcontrol.createMainObject(Integer.parseInt(classID));
       entityManager.getTransaction().commit();
       ActionNote = "Добавление произведено успешно";
     }

@@ -18,9 +18,12 @@ public class MainObjectControl {
         this.em = em;
     }
 
-    public MainObject createMainObject(int id, int classID) {
+    public MainObject createMainObject(int classID) {
         ClassTypeControl classtypecontrol = new ClassTypeControl(em);
-        MainObject et = new MainObject(id, classtypecontrol.findByIDClassType(classID));
+        
+        MainObject et = new MainObject();
+        et.setClassID(classtypecontrol.findByIDClassType(classID));
+        
         em.persist(et);
         return et;
     }

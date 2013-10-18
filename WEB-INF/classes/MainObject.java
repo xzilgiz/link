@@ -37,8 +37,9 @@ public class MainObject implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Basic(optional = false)
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mainObjectID")
+	@SequenceGenerator(name = "MainObjectID", sequenceName = "mainObjectID")
     private Integer id;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
